@@ -10,17 +10,6 @@ public class Flat {
     int floor;
     int rooms;
 
-//    public Flat(int id, ArrayList<String> stations, ArrayList<String> districts, int minPrice, int maxPrice, int minFloor, int maxFloor, int rooms) {
-//        this.id = id;
-//        this.stations = stations;
-//        this.districts = districts;
-////        this.minPrice = minPrice;
-////        this.maxPrice = maxPrice;
-//        this.minFloor = minFloor;
-//        this.maxFloor = maxFloor;
-//        this.rooms = rooms;
-//    }
-
 
     public Flat(int id, ArrayList<String> stations, ArrayList<String> districts, int price, int floor, int rooms) {
         this.id = id;
