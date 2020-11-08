@@ -6,10 +6,9 @@ public class Flat {
     private int id;
     private ArrayList<String> stations = new ArrayList<>();
     private ArrayList<String> districts = new ArrayList<>();
-    int price;
-    int floor;
-    int rooms;
-
+    private int price;
+    private int floor;
+    private int rooms;
 
     public Flat(int id, ArrayList<String> stations, ArrayList<String> districts, int price, int floor, int rooms) {
         this.id = id;

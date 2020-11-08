@@ -2,86 +2,94 @@ package tech.itpark.manager;
 
 import tech.itpark.model.Flat;
 
+import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class FlatManager {
-    private ArrayList<Flat> flats = new ArrayList<>();
+    private ArrayList<Flat> items = new ArrayList<>();
     private int nextId = 1;
 
-    public Flat save(Flat flat){
-        if (flat.getId() == 0){
-            flat.setId(nextId);
+    public Flat save(Flat item) {
+        if (item.getId() == 0) {
+            item.setId(nextId);
             nextId++;
-            flats.add(flat);
+            items.add(item);
+            return item;
         }
-        return flat;
+        Flat upd = getById(item.getId());
+        upd.setStations(item.getStations());
+        upd.setDistricts(item.getDistricts());
+        upd.setPrice(item.getPrice());
+        upd.setFloor(item.getFloor());
+        upd.setRooms(item.getRooms());
+        return upd;
     }
 
-    public ArrayList<Flat> search(ArrayList<String> stations,
-                                  ArrayList<String> districts,
-                                  int minPrice,
-                                  int maxPrice,
-                                  int minFloor,
-                                  int maxFloor,
-                                  int rooms) {
+
+    public Flat getById(int id) {
+        for (Flat item : items) {
+            if (item.getId() == id){
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Set<Flat> search(ArrayList<String> stations,
+                            ArrayList<String> districts,
+                            int minPrice,
+                            int maxPrice,
+                            int minFloor,
+                            int maxFloor,
+                            int rooms) {
         ArrayList<Flat> result = new ArrayList<>();
 
-        for (Flat flat : flats) {
-            if (containsStations(flat, stations)) {
-                result.add(flat);
+        for (Flat item : items) {
+
+            if (!containsStations(item, stations)) {
+                continue;
             }
+
+            if (containsDistricts(item, districts)) {
+                continue;
+            }
+
+            if (item.getPrice() >= minPrice && item.getPrice() <= maxPrice) {
+                continue;
+            }
+
+            if (item.getFloor() <= minFloor && item.getFloor() <= maxFloor) {
+                continue;
+            }
+
+            if (item.getRooms() == rooms) {
+                continue;
+            }
+            result.add(item);
         }
 
-        for (Flat flat : flats) {
-            if (containsDistricts(flat, districts)){
-                result.add(flat);
-            }
-        }
-
-        for (Flat flat : flats) {
-            if (flat.getPrice() >= minPrice && flat.getPrice() <= maxPrice) {
-                result.add(flat);
-            }
-        }
-
-        for (Flat flat : flats) {
-            if (flat.getFloor() <= minFloor && flat.getFloor() <= maxFloor) {
-                result.add(flat);
-            }
-        }
-
-        for (Flat flat : flats) {
-            if (flat.getRooms() == rooms) {
-                result.add(flat);
-            }
-        }
-
-        return result;
+        Set<Flat> resultNoDoubles = new LinkedHashSet<Flat>(result);
+        return resultNoDoubles;
     }
 
 
-
-    private boolean containsStations(Flat flat, ArrayList<String> stations) {
-        for (String station: flat.getStations()) {
-            if (stations.contains(station)){
-
+    private boolean containsStations(Flat item, ArrayList<String> stations) {
+        for (String station : item.getStations()) {
+            if (stations.contains(station)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean containsDistricts(Flat flat, ArrayList<String> districts) {
-        for (String district : flat.getDistricts()) {
-            if (districts.contains(district)){
+    private boolean containsDistricts(Flat item, ArrayList<String> districts) {
+        for (String district : item.getDistricts()) {
+            if (districts.contains(district)) {
                 return true;
             }
         }
         return false;
     }
-
-
-
-
-
 }
