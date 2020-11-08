@@ -74,6 +74,8 @@ public class FlatManager {
         return resultNoDoubles;
     }
 
+    // ?? Ощущение, что логика отрабатывает так, что любое совпадение по условиям в любом случае добавляет элемент в поисковую выдачу. Как быть в этом случае? Делить каждую проверку на отдельный метод?
+
 
     private boolean containsStations(Flat item, ArrayList<String> stations) {
         for (String station : item.getStations()) {
