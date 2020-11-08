@@ -48,7 +48,7 @@ public class FlatManager {
 
         for (Flat item : items) {
 
-            if (!containsStations(item, stations)) {
+            if (containsStations(item, stations)) {
                 continue;
             }
 
