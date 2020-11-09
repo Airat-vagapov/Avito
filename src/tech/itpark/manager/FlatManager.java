@@ -48,23 +48,23 @@ public class FlatManager {
 
         for (Flat item : items) {
 
-            if (containsStations(item, stations)) {
+            if (!containsStations(item, stations)) {
                 continue;
             }
 
-            if (containsDistricts(item, districts)) {
+            if (!containsDistricts(item, districts)) {
                 continue;
             }
 
-            if (item.getPrice() >= minPrice && item.getPrice() <= maxPrice) {
+            if (item.getPrice() <= minPrice && item.getPrice() >= maxPrice) {
                 continue;
             }
 
-            if (item.getFloor() <= minFloor && item.getFloor() <= maxFloor) {
+            if (item.getFloor() <= minFloor && item.getFloor() >= maxFloor) {
                 continue;
             }
 
-            if (item.getRooms() == rooms) {
+            if (item.getRooms() != rooms) {
                 continue;
             }
             result.add(item);

@@ -31,7 +31,7 @@ public class Main {
 
         Flat one = manager.save(new Flat(
                 0,
-                flatStationOne,
+                stations,
                 districts,
                 1400,
                 4,
@@ -39,11 +39,11 @@ public class Main {
 
         Flat two = manager.save(new Flat(
                 0,
-                flatStationTwo,
+                stations,
                 districts,
                 2200,
-                123,
-                52));
+                5,
+                2));
 
         manager.search(stations, districts, 1200, 1800, 2,9,2);
 
